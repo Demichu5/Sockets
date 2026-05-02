@@ -1,18 +1,51 @@
 # Network Socket Programming (C & Python)
 
-Zbiór implementacji komunikacji sieciowej w architekturze Klient-Serwer, demonstrujący obsługę stosu protokołów TCP/IP na poziomie niskopoziomowym (POSIX Sockets) oraz wysokopoziomowym (Python).
+A collection of network communication implementations in a Client-Server architecture, demonstrating low-level TCP/IP stack handling (POSIX Sockets) and high-level implementations in Python.
 
-##  Funkcjonalności
-* **Multi-threaded Server (Python):** Obsługa wielu klientów jednocześnie przy użyciu biblioteki `threading`.
-* **Low-level C Sockets:** Implementacja serwera i klienta z wykorzystaniem biblioteki `sys/socket.h`.
-* **Zarządzanie połączeniem:** Obsługa mechanizmów `bind`, `listen`, `accept` oraz bezpieczne zamykanie deskryptorów plików.
-* **Endianness Handling:** Wykorzystanie `htons` do poprawnej konwersji kolejności bajtów (Network Byte Order).
+---
+```
+### 1. Overview
+The project showcases bidirectional communication between processes using both compiled and interpreted languages.
+It covers the full lifecycle of a network connection, from socket creation to secure descriptor termination.
+```
+---
+```
+### 2. Key Features
+- Multi-threaded Server (Python): Concurrent handling of multiple client connections using the threading library.
+- Low-level C Sockets: Implementation of basic networking primitives using sys/socket.h.
+- Connection Management: Robust implementation of bind, listen, and accept mechanisms.
+- Endianness Handling: Correct use of htons to ensure Network Byte Order compatibility across different architectures.
+- Protocol Design: Implementation of custom control commands such as !exit and !shutdown to manage remote processes.
+```
+---
+```
+### 3. Technical Implementation
 
-##  Struktura
-* `client.c` / `server.c` – Niskopoziomowa komunikacja w standardzie POSIX.
-* `app_client.py` / `app_server.py` – Wielowątkowy system wymiany komunikatów z obsługą komend sterujących (`!exit`, `!shutdown`).
+Python Implementation:
+- Socket Type: AF_INET (IPv4), SOCK_STREAM (TCP).
+- Threading: Each new connection triggers a separate thread to maintain server responsiveness.
+- Buffering: Default 1024-bit message buffer using UTF-8 encoding.
 
-##  Czego się nauczyłem?
-* Zarządzania gniazdami i opcjami socketów (`SO_REUSEADDR`).
-* Synchronizacji wątków w środowisku sieciowym.
-* Projektowania prostych protokołów tekstowych do sterowania zdalnymi procesami.
+C Implementation:
+- API: POSIX Sockets.
+- Options: Utilization of SO_REUSEADDR to allow immediate socket rebinding after server restarts.
+- Data Flow: Implementation of read/write and send/recv calls for synchronous data exchange.
+```
+---
+```
+### 4. Project Structure
+- server.c / client.c: Low-level POSIX-compliant source files for C implementations.
+- app_server.py / app_client.py: High-level Python scripts for multi-threaded communication.
+- default.h: Common header file used for C type definitions (e.g., i32, i64).
+```
+---
+---
+```
+### 5. Learning Outcomes
+- Advanced understanding of the Berkeley sockets API.
+- Thread synchronization in a network environment.
+- Handling of file descriptors and system-level error reporting (perror).
+- Practical experience with cross-platform differences in networking and system shells.
+```
+---
+Created by Demichu5
