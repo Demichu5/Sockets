@@ -39,7 +39,6 @@ C Implementation:
 - default.h: Common header file used for C type definitions (e.g., i32, i64).
 ```
 ---
----
 ```
 ### 5. Learning Outcomes
 - Advanced understanding of the Berkeley sockets API.
